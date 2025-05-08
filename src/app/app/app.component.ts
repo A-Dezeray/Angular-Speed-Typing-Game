@@ -7,9 +7,10 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  initialTime: number = 0;
   currentWord: string = '';
   userInput: string = '';
   isGameActive: boolean = false;
@@ -23,25 +24,71 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     const saved = localStorage.getItem('highScore');
     this.highScore = saved ? parseInt(saved) : 0;
-  }  
+  }
 
   wordBank: { [key: string]: string[] } = {
     easy: [
-      'cat', 'dog', 'run', 'sun', 'bat', 'hat', 'bug', 'fan', 'map', 'cup',
-      'box', 'man', 'red', 'pen', 'cow', 'toy', 'jam', 'bed', 'bus', 'sky'
+      'cat',
+      'dog',
+      'run',
+      'sun',
+      'bat',
+      'hat',
+      'bug',
+      'fan',
+      'map',
+      'cup',
+      'box',
+      'man',
+      'red',
+      'pen',
+      'cow',
+      'toy',
+      'jam',
+      'bed',
+      'bus',
+      'sky',
     ],
     medium: [
-      'angular', 'binding', 'module', 'service', 'template', 'button',
-      'output', 'observe', 'project', 'command', 'routing', 'website',
-      'coding', 'browser', 'feature', 'component', 'upgrade', 'keyboard'
+      'angular',
+      'binding',
+      'module',
+      'service',
+      'template',
+      'button',
+      'output',
+      'observe',
+      'project',
+      'command',
+      'routing',
+      'website',
+      'coding',
+      'browser',
+      'feature',
+      'component',
+      'upgrade',
+      'keyboard',
     ],
     hard: [
-      'asynchronous', 'declaration', 'configuration', 'observables',
-      'typescript', 'implementation', 'architecture', 'encapsulation',
-      'inheritance', 'constructor', 'authentication', 'optimization',
-      'multithreading', 'dependency', 'synchronization', 'modularity',
-      'responsiveness', 'accessibility'
-    ]
+      'asynchronous',
+      'declaration',
+      'configuration',
+      'observables',
+      'typescript',
+      'implementation',
+      'architecture',
+      'encapsulation',
+      'inheritance',
+      'constructor',
+      'authentication',
+      'optimization',
+      'multithreading',
+      'dependency',
+      'synchronization',
+      'modularity',
+      'responsiveness',
+      'accessibility',
+    ],
   };
 
   get wordList(): string[] {
@@ -52,7 +99,9 @@ export class AppComponent implements OnInit {
     this.resetGame();
     this.isCountingDown = true;
     this.countdownValue = 3;
-    this.timeLeft = this.difficulty === 'easy' ? 120 : this.difficulty === 'medium' ? 75 : 50;
+    this.initialTime =
+      this.difficulty === 'easy' ? 120 : this.difficulty === 'medium' ? 75 : 50;
+    this.timeLeft = this.initialTime;
 
     const countdownInterval = setInterval(() => {
       this.countdownValue--;
@@ -68,13 +117,15 @@ export class AppComponent implements OnInit {
   }
 
   onInput() {
-    if (this.userInput.trim().toLowerCase() === this.currentWord.toLowerCase()) {
+    if (
+      this.userInput.trim().toLowerCase() === this.currentWord.toLowerCase()
+    ) {
       this.score++;
       if (this.score > this.highScore) {
         this.highScore = this.score;
         localStorage.setItem('highScore', this.highScore.toString());
       }
-      
+
       this.userInput = '';
       this.generateWord();
     }

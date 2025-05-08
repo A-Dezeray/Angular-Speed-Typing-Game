@@ -1,46 +1,41 @@
 <div class="container">
-    <h1 class="title">Speed Typing Game</h1>
-    <div class="difficulty-select" *ngIf="!isGameActive && !isCountingDown">
-      <label for="difficulty">Difficulty:</label>
-      <select id="difficulty" [(ngModel)]="difficulty">
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
-      </select>
-    </div>
-    
-    <div class="game-box">
-      <p class="word-display" *ngIf="isCountingDown">{{ countdownValue }}</p>
-      <p class="word-display" *ngIf="!isCountingDown && currentWord">
-        {{ currentWord }}
-      </p>
-      
-      
-      <div class="timer-bar-wrapper" *ngIf="isGameActive">
-        <div class="timer-bar" [style.width.%]="(timeLeft / 10) * 100"></div>
-      </div>
-
-      <button *ngIf="!isGameActive && timeLeft === 0" (click)="startGame()" class="restart-btn">
-        Play Again
-      </button>
-      
-      
-      <input
-        type="text"
-        [(ngModel)]="userInput"
-        (input)="onInput()"
-        [disabled]="!isGameActive"
-        placeholder="Type here..."
-      />
-      <div class="stats">
-        <span>Time: {{ timeLeft }}</span>
-        <br>
-        <span>Score: {{ score }}</span>
-        <br>
-          <span>High Score: {{ highScore }}</span>
-        
-      </div>
-      <button (click)="startGame()">Start Game</button>
-    </div>
+  <h1 class="title">Speed Typing Game</h1>
+  <div class="difficulty-select" *ngIf="!isGameActive && !isCountingDown">
+    <label for="difficulty">Difficulty:</label>
+    <select id="difficulty" [(ngModel)]="difficulty">
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
   </div>
-  
+
+  <div class="game-box">
+    <p class="word-display" *ngIf="isCountingDown">{{ countdownValue }}</p>
+    <p class="word-display" *ngIf="!isCountingDown && currentWord">
+      {{ currentWord }}
+    </p>
+
+
+    <div class="timer-bar-wrapper" *ngIf="isGameActive">
+      <div class="timer-bar" [style.width.%]="(timeLeft / initialTime) * 100"></div>
+
+    </div>
+
+    <button *ngIf="!isGameActive && timeLeft === 0" (click)="startGame()" class="restart-btn">
+      Play Again
+    </button>
+
+
+    <input *ngIf="isGameActive" type="text" [(ngModel)]="userInput" (input)="onInput()" placeholder="Type here..." />
+
+    <div class="stats">
+      <span>Time: {{ timeLeft }}</span>
+      <br>
+      <span>Score: {{ score }}</span>
+      <br>
+      <span>High Score: {{ highScore }}</span>
+
+    </div>
+    <button (click)="startGame()">Start Game</button>
+  </div>
+</div>
