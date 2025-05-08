@@ -1,5 +1,7 @@
 # SpeedTypingGame
 
+A dynamic, browser-based typing game built with Angular 19.2.11. Users type words under a countdown timer with adjustable difficulty settings. The game features real-time feedback (color flashes), animated countdowns, and local high score tracking across Easy, Medium, and Hard modes.
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
 
 ## Development server
