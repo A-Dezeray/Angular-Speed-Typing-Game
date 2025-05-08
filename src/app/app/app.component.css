@@ -1,0 +1,88 @@
+body {
+    background-color: #f0f8ff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .title {
+    color: #4a90e2;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .game-box {
+    background-color: #e6f0fa;
+    border-radius: 10px;
+    padding: 30px;
+    display: inline-block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .word-display {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    font-size: 1.2rem;
+    width: 200px;
+    border: 2px solid #a3c4f3;
+    border-radius: 5px;
+    outline: none;
+    margin-bottom: 20px;
+  }
+  
+  .stats {
+    margin: 15px 0;
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #357ab8;
+  }
+  .timer-bar-wrapper {
+    width: 100%;
+    background-color: #d0e6ff;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .timer-bar {
+    height: 100%;
+    background-color: #4a90e2;
+    transition: width 1s linear;
+  }
+  
+  .game-over {
+    color: #b33a3a;
+    font-size: 2.2rem;
+    animation: fadeIn 1s ease-in;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  

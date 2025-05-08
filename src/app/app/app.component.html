@@ -1,0 +1,27 @@
+<div class="container">
+    <h1 class="title">Speed Typing Game</h1>
+  
+    <div class="game-box">
+      <p class="word-display" [ngClass]="{ 'game-over': !isGameActive && timeLeft === 0 }">
+        {{ currentWord }}
+      </p>
+      
+      <div class="timer-bar-wrapper" *ngIf="isGameActive">
+        <div class="timer-bar" [style.width.%]="(timeLeft / 10) * 100"></div>
+      </div>
+      
+      <input
+        type="text"
+        [(ngModel)]="userInput"
+        (input)="onInput()"
+        [disabled]="!isGameActive"
+        placeholder="Type here..."
+      />
+      <div class="stats">
+        <span>Time: {{ timeLeft }}</span>
+        <span>Score: {{ score }}</span>
+      </div>
+      <button (click)="startGame()">Start Game</button>
+    </div>
+  </div>
+  
