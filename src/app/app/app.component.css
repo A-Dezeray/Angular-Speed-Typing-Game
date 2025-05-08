@@ -114,3 +114,19 @@ body {
     transform: scale(1.1);
   }
   
+  .difficulty-select {
+    margin-bottom: 20px;
+    font-size: 1rem;
+  }
+  
+  .difficulty-select label {
+    margin-right: 10px;
+    font-weight: 500;
+  }
+  
+  .difficulty-select select {
+    padding: 5px 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+  }
+  

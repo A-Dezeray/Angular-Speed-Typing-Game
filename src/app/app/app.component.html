@@ -1,6 +1,14 @@
 <div class="container">
     <h1 class="title">Speed Typing Game</h1>
-  
+    <div class="difficulty-select" *ngIf="!isGameActive && !isCountingDown">
+      <label for="difficulty">Difficulty:</label>
+      <select id="difficulty" [(ngModel)]="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </div>
+    
     <div class="game-box">
       <p class="word-display" *ngIf="isCountingDown">{{ countdownValue }}</p>
       <p class="word-display" *ngIf="!isCountingDown && currentWord">
