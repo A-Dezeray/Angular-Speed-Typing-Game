@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   currentWord: string = '';
   userInput: string = '';
   isGameActive: boolean = false;
@@ -18,6 +18,12 @@ export class AppComponent {
   countdownValue: number = 3;
   isCountingDown: boolean = false;
   difficulty: string = 'medium';
+  highScore: number = 0;
+
+  ngOnInit() {
+    const saved = localStorage.getItem('highScore');
+    this.highScore = saved ? parseInt(saved) : 0;
+  }  
 
   wordBank: { [key: string]: string[] } = {
     easy: [
@@ -64,6 +70,11 @@ export class AppComponent {
   onInput() {
     if (this.userInput.trim().toLowerCase() === this.currentWord.toLowerCase()) {
       this.score++;
+      if (this.score > this.highScore) {
+        this.highScore = this.score;
+        localStorage.setItem('highScore', this.highScore.toString());
+      }
+      
       this.userInput = '';
       this.generateWord();
     }
