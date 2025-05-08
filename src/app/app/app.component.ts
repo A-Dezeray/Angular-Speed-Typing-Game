@@ -20,10 +20,16 @@ export class AppComponent implements OnInit {
   isCountingDown: boolean = false;
   difficulty: string = 'medium';
   highScore: number = 0;
+  inputflash: boolean = false;
+  bestDifficulty: string = 'medium';
+  inputErrorFlash: boolean = false;
+  wordPool: string[] = [];
 
   ngOnInit() {
     const saved = localStorage.getItem('highScore');
+    const savedDiff = localStorage.getItem('bestDifficulty');
     this.highScore = saved ? parseInt(saved) : 0;
+    this.bestDifficulty = savedDiff || 'medium';
   }
 
   wordBank: { [key: string]: string[] } = {
@@ -101,6 +107,7 @@ export class AppComponent implements OnInit {
     this.countdownValue = 3;
     this.initialTime =
       this.difficulty === 'easy' ? 120 : this.difficulty === 'medium' ? 75 : 50;
+    this.wordPool = [...this.wordList];
     this.timeLeft = this.initialTime;
 
     const countdownInterval = setInterval(() => {
@@ -117,23 +124,38 @@ export class AppComponent implements OnInit {
   }
 
   onInput() {
-    if (
-      this.userInput.trim().toLowerCase() === this.currentWord.toLowerCase()
-    ) {
+    const trimmedInput = this.userInput.trim().toLowerCase();
+
+    if (trimmedInput === this.currentWord.toLowerCase()) {
       this.score++;
+
+      this.inputflash = true;
+      setTimeout(() => (this.inputflash = false), 150);
+
       if (this.score > this.highScore) {
         this.highScore = this.score;
         localStorage.setItem('highScore', this.highScore.toString());
+        this.bestDifficulty = this.difficulty;
+        localStorage.setItem('bestDifficulty', this.bestDifficulty);
       }
 
       this.userInput = '';
       this.generateWord();
+    } else if (
+      trimmedInput.endsWith(' ') ||
+      trimmedInput.length >= this.currentWord.length + 2
+    ) {
+      this.inputErrorFlash = true;
+      setTimeout(() => (this.inputErrorFlash = false), 150);
     }
   }
 
   generateWord() {
-    const randomIndex = Math.floor(Math.random() * this.wordList.length);
-    this.currentWord = this.wordList[randomIndex];
+    if (this.wordPool.length === 0) {
+      this.wordPool = [...this.wordList];
+    }
+
+    this.currentWord = this.wordPool.shift()!;
   }
 
   startTimer() {

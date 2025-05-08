@@ -10,7 +10,7 @@
   </div>
 
   <div class="game-box">
-    <p class="word-display" *ngIf="isCountingDown">{{ countdownValue }}</p>
+    <p class="word-display countdown" *ngIf="isCountingDown">{{ countdownValue }}</p>
     <p class="word-display" *ngIf="!isCountingDown && currentWord">
       {{ currentWord }}
     </p>
@@ -26,7 +26,9 @@
     </button>
 
 
-    <input *ngIf="isGameActive" type="text" [(ngModel)]="userInput" (input)="onInput()" placeholder="Type here..." />
+    <input *ngIf="isGameActive" type="text" [(ngModel)]="userInput" (input)="onInput()" [class.flash]="inputflash"
+      [class.error-flash]="inputErrorFlash" placeholder="Type here..." />
+
 
     <div class="stats">
       <span>Time: {{ timeLeft }}</span>
@@ -34,6 +36,8 @@
       <span>Score: {{ score }}</span>
       <br>
       <span>High Score: {{ highScore }}</span>
+      <br>
+      <span>Best At: {{ bestDifficulty | titlecase }}</span>
 
     </div>
     <button (click)="startGame()">Start Game</button>

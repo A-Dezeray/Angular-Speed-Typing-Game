@@ -135,3 +135,34 @@ button:hover {
   font-size: 1rem;
   border-radius: 5px;
 }
+
+.countdown {
+  font-size: 3rem;
+  color: #4a90e2;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+input.flash {
+  border: 2px solid #4caf50;
+  box-shadow: 0 0 10px #4caf50;
+}
+
+input.error-flash {
+  border: 2px solid #e74c3c;
+  box-shadow: 0 0 10px #e74c3c;
+}
