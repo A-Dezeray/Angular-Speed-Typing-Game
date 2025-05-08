@@ -2,9 +2,11 @@
     <h1 class="title">Speed Typing Game</h1>
   
     <div class="game-box">
-      <p class="word-display" [ngClass]="{ 'game-over': !isGameActive && timeLeft === 0 }">
+      <p class="word-display" *ngIf="isCountingDown">{{ countdownValue }}</p>
+      <p class="word-display" *ngIf="!isCountingDown && currentWord">
         {{ currentWord }}
       </p>
+      
       
       <div class="timer-bar-wrapper" *ngIf="isGameActive">
         <div class="timer-bar" [style.width.%]="(timeLeft / 10) * 100"></div>
@@ -24,6 +26,7 @@
       />
       <div class="stats">
         <span>Time: {{ timeLeft }}</span>
+        <br>
         <span>Score: {{ score }}</span>
       </div>
       <button (click)="startGame()">Start Game</button>

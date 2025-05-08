@@ -14,17 +14,31 @@ export class AppComponent {
   currentWord: string = '';
   userInput: string = '';
   isGameActive: boolean = false;
-  timeLeft: number = 10;
+  timeLeft: number = 60;
   score: number = 0;
+  countdownValue: number = 3;
+  isCountingDown: boolean = false;
+
 
   wordList: string[] = ['angular', 'typescript', 'component', 'template', 'binding', 'module', 'service'];
 
   startGame() {
     this.resetGame();
-    this.isGameActive = true;
-    this.generateWord();
-    this.startTimer();
-  }
+    this.isCountingDown = true;
+    this.countdownValue = 3;
+  
+    const countdownInterval = setInterval(() => {
+      this.countdownValue--;
+  
+      if (this.countdownValue === 0) {
+        clearInterval(countdownInterval);
+        this.isCountingDown = false;
+        this.isGameActive = true;
+        this.generateWord();
+        this.startTimer();
+      }
+    }, 1000);
+  }  
 
   onInput() {
     if (this.userInput.trim().toLowerCase() === this.currentWord.toLowerCase()) {
